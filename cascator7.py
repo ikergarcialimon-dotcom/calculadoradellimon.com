@@ -1,10 +1,17 @@
+import streamlit as st
+
+# Configuración de página
+st.set_page_config(
+    page_title="Calculadora de Rebajas",
+    page_icon="🛍️",
+    layout="centered"
+)
+
 st.title("🛍️ Calculadora Profesional de Rebajas")
 st.markdown("Introduce el precio original y el porcentaje de descuento para calcular el precio final.")
 st.divider()
 
-
-
-
+# Sidebar
 st.sidebar.header("📌 Datos del Producto")
 
 precio_original = st.sidebar.number_input(
@@ -22,13 +29,12 @@ descuento = st.sidebar.slider(
     value=20
 )
 
-
+# Botón
 if st.button("💰 Calcular Precio Final"):
 
-    if precio_original == 0:
+    if precio_original <= 0:
         st.error("El precio original debe ser mayor que 0.")
     else:
-        # Cálculo correcto
         ahorro = precio_original * (descuento / 100)
         precio_final = precio_original - ahorro
 
@@ -54,7 +60,6 @@ if st.button("💰 Calcular Precio Final"):
 
         st.divider()
 
-    
         st.info("Fórmula matemática aplicada:")
         st.latex(r'''
         Precio\ Final = Precio\ Original - (Precio\ Original \times \frac{Descuento}{100})
